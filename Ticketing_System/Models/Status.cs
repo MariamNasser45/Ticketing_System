@@ -9,5 +9,6 @@ namespace Ticketing_System.Models
         [Required]
         [StringLength(15)]
         public string StatusName { get; set; }
+
     }
 }

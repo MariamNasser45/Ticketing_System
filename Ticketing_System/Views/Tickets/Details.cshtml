@@ -1,0 +1,83 @@
+﻿@model Ticketing_System.Models.Ticket
+
+@{
+    ViewData["Title"] = "Ticket Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <hr />
+    <dl class="row" style="background-color:black; text-align:justify; font-weight:bold; font-size:large;color:white">
+        <dt class="col-sm-3">
+            <label asp-for="TicketId"></label>
+        </dt>
+        <dd class="col-sm-8">
+            <p>@Model.TicketId</p>
+        </dd>
+        <dt class="col-sm-3">
+            <label asp-for="CategoryId"></label>
+        </dt>
+        <dd class="col-sm-8">
+            <p>@Model.CategoryId</p>
+        </dd>
+        <dt class="col-sm-3">
+            <label asp-for="StatusId"></label>
+        </dt>
+        <dd class="col-sm-8">
+            <p>@Model.StatusId</p>
+        </dd>
+        <dt class="col-sm-3">
+            <label asp-for="SeverityId"></label>
+        </dt>
+        <dd class="col-sm-8">
+            <p>@Model.SeverityId</p>
+        </dd>
+        <dt class="col-sm-3">
+            <label asp-for="IssueStartDate"></label>
+        </dt>
+        <dd class="col-sm-8">
+            <p>@Model.IssueStartDate</p>
+        </dd>
+        <dt class="col-sm-3">
+            <label asp-for="SLInHours"></label>
+        </dt>
+        <dd class="col-sm-8">
+            <p>@Model.SLInHours</p>
+        </dd>
+        <dt class="col-sm-3">
+            <label asp-for="Description"></label>
+        </dt>
+        <dd class="col-sm-8">
+            <p>@Model.Description</p>
+        </dd>
+        <dt class="col-sm-3">
+            <label asp-for="CreatorId"></label>
+        </dt>
+        <dd class="col-sm-8">
+            <p>@User.Identity.Name</p>
+        </dd>
+        <dt class="col-sm-3">
+            <label asp-for="LastActionDateTime"></label>
+        </dt>
+        <dd class="col-sm-8">
+            <p>@Model.LastActionDateTime</p>
+        </dd>
+        <dt class="col-sm-3">
+            <label asp-for="LastUpdatedBy"></label>
+        </dt>
+        <dd class="col-sm-8">
+            <p>@Model.LastUpdatedBy</p>
+        </dd>
+        <dt class="col-sm-3">
+            <label asp-for="SLEndDateTime"></label>
+        </dt>
+        <dd class="col-sm-8">
+            <p>@Model.SLEndDateTime</p>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.TicketId" class="btn btn-outline-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-outline-dark">Back to List</a>
+</div>

@@ -40,13 +40,13 @@ namespace Ticketing_System.Data
 
         }
 
-        DbSet<Category> Categories { get; set; }
-
-        DbSet<Severity> Severities { get; set; }
-
-        DbSet<Status> Statuses { get; set; }
-
-        DbSet<Ticket> Tickets { get; set; }
+       public DbSet<Category> Categories { get; set; }
+      
+       public DbSet<Severity> Severities { get; set; }
+       
+       public DbSet<Status> Statuses { get; set; }
+      
+       public DbSet<Ticket> Tickets { get; set; }
 
     }
 }

@@ -1,0 +1,64 @@
+﻿@model Ticketing_System.Models.Ticket
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Teckiting System</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" asp-items="@ViewBag.category" class="form-control" ></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SeverityId" class="control-label"></label>
+                <select asp-for="SeverityId" asp-items="@ViewBag.severity" class="form-control"></select>
+                <span asp-validation-for="SeverityId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IssueStartDate" class="control-label"></label>
+                <input type="date" asp-for="IssueStartDate" max="@DateOnly.FromDateTime(DateTime.Now).ToString("yyyy-MM-dd")" class="form-control" />
+                <span asp-validation-for="IssueStartDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SLInHours" class="control-label"></label>
+                <input type="number" min="1" asp-for="SLInHours" class="form-control"/>
+                <span asp-validation-for="SLInHours" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input type="text" asp-for="Description" class="form-control"  />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CreatorId" class="control-label"></label>
+                <input  value="@User.Identity.Name"  asp-for="CreatorId" class="form-control"/>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-outline-success" />
+                <a asp-action="Index" class="btn btn-outline-dark ms-lg-2">Back to List</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

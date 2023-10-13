@@ -9,5 +9,10 @@ namespace Ticketing_System.Models
         [Required]
         [StringLength(25)]
         public string CategoryName { get; set; }
+
+        public override string ToString()
+        {
+            return CategoryName;
+        }
     }
 }

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Ticketing_System.Models.Ticket>
+@using Ticketing_System.Models;
+@{
+    ViewData["Title"] = "All Tickets";
+}
+
+@*<form method="post" asp-action="Index" class="d-flex justify-content-center">
+
+    <input type="text" placeholder="Ticket Id"/>
+
+    <input type="submit" class="btn btn-outline-dark mb-3 mt-3" style="margin-left:4px" value="Go" />
+</form>*@
+
+<table class="table table-striped table-dark">
+    <thead>
+        @*in oreder to use asp-for with IEnumerable then need to using the extension-methods "First()" of IEnumerable<T>*@
+        <tr>
+            <th>
+                <label asp-for="First().TicketId"></label>
+            </th>
+            <th>
+                <label asp-for="First().StatusId"></label>
+            </th>
+            <th>
+                <label asp-for="First().SeverityId"></label>
+            </th>
+            <th>
+                <label asp-for="First().CategoryId"></label>
+            </th>
+            <th>
+                <label asp-for="First().CreatorId"></label>
+            </th>
+            <th>
+                <label asp-for="First().SLInHours"></label>
+            </th>
+            <th>
+                <label asp-for="First().Description"></label>
+            </th>
+            <th>
+                <label asp-for="First().CreationDateTime"></label>
+            </th>
+            <th>
+                <label asp-for="First().LastActionDateTime"></label>
+            </th>
+            <th>
+                <label asp-for="First().LastUpdatedBy"></label>
+            </th>
+            <th>
+                <label asp-for="First().SLEndDateTime"></label>
+            </th>
+
+            <th></th>
+            <th></th>
+            <th></th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    <p>@item.TicketId</p>
+            </td>
+                <td>
+                    <p>@item.StatusId</p>
+                </td>
+            <td>
+                    <p>@item.SeverityId</p>
+            </td>
+            <td>
+                    <p>@item.CategoryId</p>
+            </td>
+                <td>
+                    <p>@User.Identity.Name</p>
+                </td>
+            <td>
+                    <p>@item.SLInHours</p>
+            </td>
+            <td>
+                    <p>@item.Description</p>
+            </td>
+         
+                <td>
+                    <p>@item.CreationDateTime</p>
+                </td>
+                <td>
+                    <p>@item.LastActionDateTime</p>
+                </td>
+                <td>
+                    <p>@User.Identity.Name</p>
+                </td>
+                <td>
+                    <p>@item.SLEndDateTime</p>
+                </td>
+
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.TicketId" class="btn btn-outline-warning">Edit</a>
+                        </td>
+
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.TicketId" class="btn btn-outline-info">Details</a>
+                        </td>
+                <td>
+
+                            <a asp-action="Delete" asp-route-id="@item.TicketId" class="btn btn-outline-danger">Delete</a>
+                </td>
+
+
+      @*          @{
+                    if(User.IsInRole("Admin"))
+                    {
+                    }
+                }*@
+        </tr>
+}
+    </tbody>
+</table>
