@@ -18,9 +18,19 @@ namespace Ticketing_System
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+          
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultUI()
+            .AddDefaultTokenProviders();
+
+
+
+            builder.Services.AddRazorPages();
 
             builder.Services.AddScoped<ITicket, TicketIMP>();
             builder.Services.AddScoped<ICategory, CategoryImp>();
