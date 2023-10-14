@@ -1,4 +1,6 @@
-﻿@model Ticketing_System.Models.Ticket
+﻿@using Microsoft.AspNetCore.Identity;
+@model Ticketing_System.Models.Ticket
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Ticket Delete";
@@ -55,7 +57,11 @@
             <label asp-for="CreatorId"></label>
         </dt>
         <dd class="col-sm-8">
-            <p>@User.Identity.Name</p>
+            @{
+                var user = await UserManager.FindByIdAsync(Model.CreatorId);
+                var name = user?.UserName;
+            }
+            <p>@name</p>
         </dd>
         <dt class="col-sm-3">
             <label asp-for="LastActionDateTime"></label>
@@ -63,12 +69,7 @@
         <dd class="col-sm-8">
             <p>@Model.LastActionDateTime</p>
         </dd>
-        <dt class="col-sm-3">
-            <label asp-for="LastUpdatedBy"></label>
-        </dt>
-        <dd class="col-sm-8">
-            <p>@Model.LastUpdatedBy</p>
-        </dd>
+
         <dt class="col-sm-3">
             <label asp-for="SLEndDateTime"></label>
         </dt>
