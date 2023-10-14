@@ -16,6 +16,9 @@ namespace Ticketing_System.Interfaces.Implemintation
             return Context.Statuses.Where(s=>s.StatusName!="New").ToList();
         }
 
-
+        public List<Status> GetAllForMan()
+        {
+            return Context.Statuses.Where(s => s.StatusName == "New" || s.StatusName== "Assigned").ToList();
+        }
     }
 }

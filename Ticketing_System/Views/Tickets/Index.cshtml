@@ -100,7 +100,7 @@
                     <p>@item.LastActionDateTime</p>
                 </td>
                 <td>
-                    <p>@User.Identity.Name</p>
+                    <p>@item.LastUpdatedBy</p>
                 </td>
                 <td>
                     <p>@item.IssueStartDate</p>
@@ -126,7 +126,6 @@
                     if(User.IsInRole("Reporter"))
                     {
                         <td>
-
                             <a asp-action="Delete" asp-route-id="@item.TicketId" class="btn btn-outline-danger">Delete</a>
                         </td>
                     }

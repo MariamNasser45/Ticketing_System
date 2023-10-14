@@ -93,6 +93,7 @@ namespace Ticketing_System.Controllers
         {
             ViewBag.category = new SelectList(category.GetAll(), "CategoryId", "CategoryName");
             ViewBag.status = new SelectList(status.GetAll(), "StatusId", "StatusName");
+            ViewBag.Mstatus = new SelectList(status.GetAllForMan(), "StatusId", "StatusName");
             ViewBag.severity = new SelectList(severity.GetAll(), "SeverityId", "SeverityName");
             
             return View(Ticket.GetById(id));
