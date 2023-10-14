@@ -16,6 +16,9 @@
                 if(User.IsInRole("Reporter"))
                 {
                     <div class="form-group">
+                        <input hidden asp-for="TicketId" class="form-control" />
+                    </div>
+                    <div class="form-group">
                         <input hidden asp-for="CreatorId" class="form-control" />
                     </div>
                 <div class="form-group">

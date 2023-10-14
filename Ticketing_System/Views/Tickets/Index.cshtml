@@ -79,13 +79,22 @@
                     <p>@item.TicketId</p>
             </td>
                 <td>
-                    <p>@item.StatusId</p>
+                    @{
+                        var statusname = item.status?.StatusName;
+                    }
+                    <p>@statusname</p>
                 </td>
             <td>
-                    <p>@item.SeverityId</p>
+                    @{
+                        var severityname = item.severity?.SeverityName;
+                    }
+                    <p>@severityname</p>
             </td>
             <td>
-                    <p>@item.CategoryId</p>
+                    @{
+                        var categoryname = item.category?.CategoryName;
+                    }
+                    <p>@categoryname</p>
             </td>
                 <td>
                     @{

@@ -20,7 +20,9 @@ namespace Ticketing_System.Interfaces.Implemintation
         }
         public List<Ticket> GetAllForUser(string id)
         {
-            return Context.Tickets.Where(t=>t.CreatorId==id).ToList();
+            return Context.Tickets
+                .Include(t=>t.status).Include(t=>t.category).Include(t=>t.severity)
+                .Where(t=>t.CreatorId==id).ToList();
         }
         public List<Ticket> GetByStatus(int id)
         {

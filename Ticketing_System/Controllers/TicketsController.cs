@@ -57,7 +57,6 @@ namespace Ticketing_System.Controllers
         // GET: Tickets/Details/5
         public ActionResult Details(int id)
         {
-            
             return View(Ticket.GetById(id));
         }
 
