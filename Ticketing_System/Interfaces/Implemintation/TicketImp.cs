@@ -24,7 +24,7 @@ namespace Ticketing_System.Interfaces.Implemintation
         }
         public List<Ticket> GetByStatus(int id)
         {
-            return Context.Tickets.Where(t=>t.StatusId==id).ToList();
+            return Context.Tickets.Where(t=>t.StatusId==id).OrderBy(s=>s.SLEndDateTime).ToList();
         }
 
 

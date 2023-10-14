@@ -6,9 +6,9 @@
 
 <form method="post" asp-action="Details" class="d-flex justify-content-center">
 
-    <input type="number" class="w-25 h-50 mt-2" placeholder="Ticket Id"/>
+    <input type="number" name="id" class="w-25 h-50 mt-2" placeholder="Ticket Id" />
 
-    <input type="submit" asp-route-id="TicketId" class="btn btn-outline-dark mb-4 mt-2" style="margin-left:4px" value="Go" />
+    <input type="submit"  class="btn btn-outline-dark mb-4 mt-2" style="margin-left:4px" value="Go" />
 </form>
 
 <table class="table table-striped table-dark">
@@ -54,12 +54,19 @@
 
             <th></th>
             <th></th>
-            <th></th>
+            @{
+                if(User.IsInRole("Reporter"))
+                {
+                    <th></th>
+
+                }
+            }
             
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model) 
+{
         <tr>
             <td>
                     <p>@item.TicketId</p>
@@ -120,5 +127,6 @@
                 }
         </tr>
 }
+
     </tbody>
 </table>

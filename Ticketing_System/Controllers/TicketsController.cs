@@ -62,9 +62,9 @@ namespace Ticketing_System.Controllers
         [Authorize(Roles = "Reporter")]
         public ActionResult Create()
         {
-            ViewBag.category = new SelectList(category.GellAll(),"CategoryId","CategoryName");
-            ViewBag.status = new SelectList(status.GellAll(), "StatusId", "StatusName");
-            ViewBag.severity = new SelectList(severity.GellAll(), "SeverityId", "SeverityName");
+            ViewBag.category = new SelectList(category.GetAll(),"CategoryId","CategoryName");
+            ViewBag.status = new SelectList(status.GetAll(), "StatusId", "StatusName");
+            ViewBag.severity = new SelectList(severity.GetAll(), "SeverityId", "SeverityName");
 
             return View();
         }
@@ -91,9 +91,9 @@ namespace Ticketing_System.Controllers
         // GET: Tickets/Edit/5
         public ActionResult Edit(int id)
         {
-            ViewBag.category = new SelectList(category.GellAll(), "CategoryId", "CategoryName");
-            ViewBag.status = new SelectList(status.GellAll(), "StatusId", "StatusName");
-            ViewBag.severity = new SelectList(severity.GellAll(), "SeverityId", "SeverityName");
+            ViewBag.category = new SelectList(category.GetAll(), "CategoryId", "CategoryName");
+            ViewBag.status = new SelectList(status.GetAll(), "StatusId", "StatusName");
+            ViewBag.severity = new SelectList(severity.GetAll(), "SeverityId", "SeverityName");
             
             return View(Ticket.GetById(id));
         }

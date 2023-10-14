@@ -11,20 +11,11 @@ namespace Ticketing_System.Interfaces.Implemintation
             Context = context;
         }
 
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Status> GellAll()
+        public List<Status> GetAll()
         {
             return Context.Statuses.ToList();
         }
 
-        public Status Update(Status status)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

@@ -11,21 +11,11 @@ namespace Ticketing_System.Interfaces.Implemintation
             Context = context;
         }
 
-
-        public void Delete(int id)
+        public List<Severity> GetAll()
         {
-            throw new NotImplementedException();
-        }
+            return Context.Severities.ToList();
 
-        public List<Severity> GellAll()
-        {
-           return Context.Severities.ToList();
 
-        }
-
-        public Severity Update(Severity severity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -12,19 +12,10 @@ namespace Ticketing_System.Interfaces.Implemintation
         }
 
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Category> GellAll()
+        public List<Category> GetAll()
         {
             return Context.Categories.ToList();
         }
 
-        public Category Update(Category category)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

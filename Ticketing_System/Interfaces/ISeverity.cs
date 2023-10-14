@@ -4,10 +4,8 @@ namespace Ticketing_System.Interfaces
 {
     public interface ISeverity
     {
-        public List<Severity> GellAll();
+        public List<Severity> GetAll();
 
-        public Severity Update(Severity severity);
 
-        public void Delete(int id);
     }
 }

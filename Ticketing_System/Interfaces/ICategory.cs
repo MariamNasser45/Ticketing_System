@@ -4,10 +4,8 @@ namespace Ticketing_System.Interfaces
 {
     public interface ICategory
     {
-        public List<Category> GellAll();
+        public List<Category> GetAll();
 
-        public Category Update(Category category);
-
-        public void Delete(int id);
+ 
     }
 }
