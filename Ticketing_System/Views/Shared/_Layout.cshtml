@@ -13,12 +13,21 @@
         <nav class="navbar navbar-dark-sm mb-3 mt-3 bg-dark">
             <div class="container-fluid mb-3 mt-3 d-flex justify-content-around">
 
-                <a class="navbar-link btn btn-outline-light" asp-area="" asp-controller="Tickets" asp-action="Index">Tickets</a>
 
-                <a class="navbar-link btn btn-outline-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+@*                <a class="navbar-link btn btn-outline-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 
 
                 <a class="navbar-link btn btn-outline-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+*@
+                <a class="navbar-link btn btn-outline-light" asp-area="" asp-controller="Tickets" asp-action="Create">Create Tickts</a>
+
+                @{
+                    if(User.Identity.IsAuthenticated)
+                    {
+                          <a class="navbar-link btn btn-outline-light" asp-area="" asp-controller="tickets" asp-action="index">tickets</a>
+                        
+                    }
+                }
 
                 <partial name="_LoginPartial" />
 

@@ -5,14 +5,15 @@ namespace Ticketing_System.Interfaces
     public interface ITicket
     {
         public List<Ticket> GetAll();
+        public List<Ticket> GetAllForUser(string id);
 
-        public List<Ticket> GetOnlyNews();
+        public List<Ticket> GetByStatus(int id);
 
         public Ticket GetById(int id);
 
         public void Insert(Ticket ticket);
 
-        public Ticket Update(Ticket ticket);
+        public void Update(Ticket ticket);
 
         public void Delete(int id);
 

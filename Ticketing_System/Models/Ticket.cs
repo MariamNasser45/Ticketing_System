@@ -30,7 +30,7 @@ namespace Ticketing_System.Models
         [Required]
         [Range(1, int.MaxValue)]
         [Display(Name = "SL In Hours")]
-        public int? SLInHours { get; set; }
+        public double SLInHours { get; set; }
 
         [MaxLength(250)]
         [Display(Name = "Description")]
@@ -42,7 +42,7 @@ namespace Ticketing_System.Models
         [Required]
         [DataType(DataType.DateTime)]
         [Display(Name = "Creation Date/Time ")]
-        public DateTime CreationDateTime { get; set; } = DateTime.Now;
+        public DateTime CreationDateTime { get; set; } = DateTime.UtcNow;
 
         [Required]
         [DataType(DataType.DateTime)]
@@ -54,7 +54,7 @@ namespace Ticketing_System.Models
         public string? LastUpdatedBy { get; set; }
 
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Display(Name = "SL End Date/Time ")]
 
         public DateTime? SLEndDateTime { get; set; }

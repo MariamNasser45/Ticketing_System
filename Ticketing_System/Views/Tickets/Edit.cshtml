@@ -10,65 +10,82 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" asp-items="@ViewBag.category" class="form-control"></select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
+            @{
+                if(User.IsInRole("Reporter"))
+                {
+                    <div class="form-group">
+                        <input hidden asp-for="CreatorId" class="form-control" />
+                    </div>
+                <div class="form-group">
+                    <label asp-for="CategoryId" class="control-label"></label>
+                    <select asp-for="CategoryId" asp-items="@ViewBag.category" class="form-control"></select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="SeverityId" class="control-label"></label>
-                <select asp-for="SeverityId" asp-items="@ViewBag.severity" class="form-control"></select>
-                <span asp-validation-for="SeverityId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StatusId" class="control-label"></label>
-                <select asp-for="StatusId" asp-items="@ViewBag.status" class="form-control"></select>
-                <span asp-validation-for="StatusId" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="SeverityId" class="control-label"></label>
+                    <select asp-for="SeverityId" asp-items="@ViewBag.severity" class="form-control"></select>
+                    <span asp-validation-for="SeverityId" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="IssueStartDate" class="control-label"></label>
-                <input type="date" asp-for="IssueStartDate" max="@DateOnly.FromDateTime(DateTime.Now).ToString("yyyy-MM-dd")" class="form-control" />
-                <span asp-validation-for="IssueStartDate" class="text-danger"></span>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="IssueStartDate" class="control-label"></label>
+                        <input type="date" asp-for="IssueStartDate" max="@DateOnly.FromDateTime(DateTime.Now).ToString("yyyy-MM-dd")" class="form-control" />
+                        <span asp-validation-for="IssueStartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SLInHours" class="control-label"></label>
+                        <input type="number" min="1" asp-for="SLInHours" class="form-control" />
+                        <span asp-validation-for="SLInHours" class="text-danger"></span>
 
-            <div class="form-group">
-                <label asp-for="SLInHours" class="control-label"></label>
-                <input type="number" min="1" asp-for="SLInHours" class="form-control" />
-                <span asp-validation-for="SLInHours" class="text-danger"></span>
+                    </div>
 
-            </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input type="text" asp-for="Description" class="form-control" />
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input type="text" asp-for="Description" class="form-control" />
-            </div>
+                }
+                else if (User.IsInRole("Technician") || User.IsInRole("Manager"))
+                {
+                    <div class="form-group">
+                        <input hidden asp-for="TicketId" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <input hidden asp-for="CreatorId" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <select hidden asp-for="CategoryId" asp-items="@ViewBag.category" class="form-control"></select>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="CreatorId" class="control-label"></label>
-                <input disabled value="@User.Identity.Name" asp-for="CreatorId" class="form-control" />
-            </div>
+                    <div class="form-group">
+                        <select hidden asp-for="SeverityId" asp-items="@ViewBag.severity" class="form-control"></select>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="CreationDateTime" class="control-label"></label>
-                <input disabled type="datetime" value="@DateTime.Now" asp-for="SLInHours" class="form-control"/>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="StatusId" class="control-label"></label>
+                        <select asp-for="StatusId" asp-items="@ViewBag.status" class="form-control"></select>
+                        <span asp-validation-for="StatusId" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="LastActionDateTime" class="control-label"></label>
-                <input  type="date" asp-for="LastActionDateTime" class="form-control"/>
-            </div>
+                    <div class="form-group">
+                        <input hidden type="text" asp-for="Description" class="form-control" />
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="LastUpdatedBy" class="control-label"></label>
-                <input value="@User.Identity.Name" asp-for="LastUpdatedBy" class="form-control" />
-            </div>
+                    <div class="form-group">
+                        <input hidden asp-for="SLInHours" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input hidden asp-for="IssueStartDate" class="form-control" />
+                    </div>
+
+                } 
+            }
 
             <div class="form-group mt-3">
-                <input type="submit" value="Create" class="btn btn-outline-success" />
+                <input type="submit" value="Save" class="btn btn-outline-success" />
                 <a asp-action="Index" class="btn btn-outline-dark ms-lg-2">Back to List</a>
             </div>
         </form>

@@ -18,11 +18,15 @@ namespace Ticketing_System.Interfaces.Implemintation
         {
            return Context.Tickets.ToList();
         }
-
-        public List<Ticket> GetOnlyNews()
+        public List<Ticket> GetAllForUser(string id)
         {
-            return Context.Tickets.Where(t=>t.StatusId==1).ToList();
+            return Context.Tickets.Where(t=>t.CreatorId==id).ToList();
         }
+        public List<Ticket> GetByStatus(int id)
+        {
+            return Context.Tickets.Where(t=>t.StatusId==id).ToList();
+        }
+
 
         public Ticket GetById(int id)
         {
@@ -36,8 +40,9 @@ namespace Ticketing_System.Interfaces.Implemintation
         {
             if(ticket!=null)
             {
-                //ticket.StatusId = 1;
+                
                 ticket.LastActionDateTime = ticket.IssueStartDate;
+                ticket.SLEndDateTime = ticket.IssueStartDate.AddHours(ticket.SLInHours);
 
                 Context.Add(ticket);
                 Context.SaveChanges();
@@ -45,13 +50,16 @@ namespace Ticketing_System.Interfaces.Implemintation
             }
         }
 
-        public Ticket Update(Ticket ticket)
+        public void Update(Ticket ticket)
         {
             if (ticket!=null)
             {
-                Context.Tickets.Where(t=>t.TicketId==ticket.TicketId).ExecuteUpdate(t=>t.SetProperty(t=>t,ticket));
+                ticket.LastActionDateTime = DateTime.UtcNow;
+                ticket.SLEndDateTime = ticket.IssueStartDate.AddHours(ticket.SLInHours);
+                Context.Update(ticket);
+                Context.SaveChanges();
             }
-            throw new NullReferenceException();
+           
         }
 
         public void Delete(int id)
@@ -60,7 +68,6 @@ namespace Ticketing_System.Interfaces.Implemintation
             {
                 Context.Tickets.Where(t => t.TicketId == id).ExecuteDelete();
             }
-            throw new NotImplementedException();
         }
     }
 }

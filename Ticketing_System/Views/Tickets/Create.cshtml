@@ -42,10 +42,12 @@
                 <input type="text" asp-for="Description" class="form-control"  />
             </div>
 
-            <div class="form-group">
+         @* 
+             <div class="form-group">
                 <label asp-for="CreatorId" class="control-label"></label>
                 <input  value="@User.Identity.Name"  asp-for="CreatorId" class="form-control"/>
             </div>
+         *@
 
             <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-outline-success" />

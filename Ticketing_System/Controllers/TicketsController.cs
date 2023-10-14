@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Exchange.WebServices.Data;
+using System.Data;
 using System.Security.Claims;
 using Ticketing_System.Data;
 using Ticketing_System.Interfaces;
@@ -28,7 +31,23 @@ namespace Ticketing_System.Controllers
         // GET: Tickets
         public IActionResult Index()
         {
-            return View(Ticket.GetAll());
+            if(User.IsInRole("Reporter"))
+            {
+                return View(Ticket.GetAllForUser(User.FindFirst(ClaimTypes.NameIdentifier).Value));
+            }
+            else if (User.IsInRole("Technician"))
+            {
+                return View(Ticket.GetByStatus(2));
+
+            }
+            else if (User.IsInRole("Manager"))
+            {
+                return View(Ticket.GetByStatus(1));
+                //return View();
+
+            }
+            else
+                return View("/Home"); 
         }
 
 
@@ -40,6 +59,7 @@ namespace Ticketing_System.Controllers
         }
 
         // GET: Tickets/Create
+        [Authorize(Roles = "Reporter")]
         public ActionResult Create()
         {
             ViewBag.category = new SelectList(category.GellAll(),"CategoryId","CategoryName");
@@ -58,7 +78,8 @@ namespace Ticketing_System.Controllers
             {
                 ticket.CreatorId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 Ticket.Insert(ticket);
-                return RedirectToAction(nameof(Index));
+                Details(ticket.TicketId);
+                return View("Details");
             }
             catch
             {
@@ -66,23 +87,27 @@ namespace Ticketing_System.Controllers
             }
         }
 
+        [Authorize]
         // GET: Tickets/Edit/5
         public ActionResult Edit(int id)
         {
             ViewBag.category = new SelectList(category.GellAll(), "CategoryId", "CategoryName");
             ViewBag.status = new SelectList(status.GellAll(), "StatusId", "StatusName");
             ViewBag.severity = new SelectList(severity.GellAll(), "SeverityId", "SeverityName");
+            
             return View(Ticket.GetById(id));
         }
 
         // POST: Tickets/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Ticket ticket)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                ticket.LastUpdatedBy = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                Ticket.Update(ticket);
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -90,6 +115,7 @@ namespace Ticketing_System.Controllers
             }
         }
 
+        [Authorize(Roles ="Reporter")]
         // GET: Tickets/Delete/5
         [HttpGet]
         public ActionResult Delete(int id)
