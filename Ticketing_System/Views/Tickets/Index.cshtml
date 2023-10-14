@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<Ticketing_System.Models.Ticket>
+@inject UserManager<IdentityUser> UserManager
+@using Microsoft.AspNetCore.Identity;
 @using Ticketing_System.Models;
+
 @{
+
     ViewData["Title"] = "All Tickets";
 }
 
@@ -84,7 +88,11 @@
                     <p>@item.CategoryId</p>
             </td>
                 <td>
-                    <p>@item.CreatorId</p>
+                    @{
+                        var creator = await UserManager.FindByIdAsync(item.CreatorId);
+                        var creatorname = creator?.UserName;
+                    }
+                    <p>@creatorname</p>
                 </td>
             <td>
                     <p>@item.SLInHours</p>
@@ -100,7 +108,11 @@
                     <p>@item.LastActionDateTime</p>
                 </td>
                 <td>
-                    <p>@item.LastUpdatedBy</p>
+                    @{
+                        var user = await UserManager.FindByIdAsync(item.LastUpdatedBy);
+                        var username = user?.UserName;
+                    }
+                    <p>@username</p>
                 </td>
                 <td>
                     <p>@item.IssueStartDate</p>

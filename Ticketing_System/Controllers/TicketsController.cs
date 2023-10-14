@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Exchange.WebServices.Data;
@@ -18,14 +19,16 @@ namespace Ticketing_System.Controllers
         private readonly ICategory category;
         private readonly ISeverity severity;
         private readonly IStatus status;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public TicketsController(ApplicationDbContext context, ITicket ticket , ICategory category , ISeverity severity,IStatus status)
+        public TicketsController(ApplicationDbContext context, ITicket ticket , ICategory category , ISeverity severity,IStatus status,UserManager<IdentityUser> userManager)
         {
             Context = context;
             this.Ticket = ticket;
             this.category = category;
             this.severity = severity;
             this.status = status;
+            this.userManager = userManager;
         }
 
         // GET: Tickets
