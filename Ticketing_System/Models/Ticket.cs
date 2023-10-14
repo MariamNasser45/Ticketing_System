@@ -59,6 +59,8 @@ namespace Ticketing_System.Models
 
         public DateTime? SLEndDateTime { get; set; }
 
+        public string? Comment { get; set; }
+
         //// This to calculated column for SL end date/time
         //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         //public DateTime SLEndDateTime => IssueStartDate.AddHours(SLInHours);  // other syntax is 

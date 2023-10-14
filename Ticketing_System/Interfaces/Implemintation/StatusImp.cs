@@ -13,7 +13,7 @@ namespace Ticketing_System.Interfaces.Implemintation
 
         public List<Status> GetAll()
         {
-            return Context.Statuses.ToList();
+            return Context.Statuses.Where(s=>s.StatusName!="New").ToList();
         }
 
 
