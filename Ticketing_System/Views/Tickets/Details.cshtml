@@ -21,19 +21,19 @@
             <label asp-for="CategoryId"></label>
         </dt>
         <dd class="col-sm-8">
-            <p>@Model.CategoryId</p>
+            <p>@Model.category?.CategoryName</p>
         </dd>
         <dt class="col-sm-3">
             <label asp-for="StatusId"></label>
         </dt>
         <dd class="col-sm-8">
-            <p>@Model.StatusId</p>
+            <p>@Model.status?.StatusName</p>
         </dd>
         <dt class="col-sm-3">
             <label asp-for="SeverityId"></label>
         </dt>
         <dd class="col-sm-8">
-            <p>@Model.SeverityId</p>
+            <p>@Model.severity?.SeverityName</p>
         </dd>
         <dt class="col-sm-3">
             <label asp-for="IssueStartDate"></label>
@@ -59,15 +59,23 @@
         <dd class="col-sm-8">
             @{
                 var user = await UserManager.FindByIdAsync(Model.CreatorId);
-                var name = user?.UserName;
                 }
-            <p> @name </p>
+            <p> @user?.UserName </p>
         </dd>
         <dt class="col-sm-3">
             <label asp-for="LastActionDateTime"></label>
         </dt>
         <dd class="col-sm-8">
             <p>@Model.LastActionDateTime</p>
+        </dd>
+        <dt class="col-sm-3">
+            <label asp-for="LastUpdatedBy"></label>
+        </dt>
+        <dd class="col-sm-8">
+            @{
+                var user1 = await UserManager.FindByIdAsync(Model.LastUpdatedBy);
+            }
+            <p>@user1?.UserName</p>
         </dd>
 
         <dt class="col-sm-3">

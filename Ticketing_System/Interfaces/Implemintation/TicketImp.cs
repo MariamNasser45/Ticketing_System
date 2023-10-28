@@ -26,16 +26,25 @@ namespace Ticketing_System.Interfaces.Implemintation
         }
         public List<Ticket> GetByStatus(int id)
         {
-            return Context.Tickets.Where(t=>t.StatusId==id).OrderBy(s=>s.SLEndDateTime).ToList();
+            return Context.Tickets.Include(t=>t.category)
+                .Include(t=>t.severity)
+                .Include(t => t.status).Where(t=>t.StatusId==id).OrderBy(s=>s.SLEndDateTime).ToList();
         }
 
 
         public Ticket GetById(int id)
         {
-            if (Context.Tickets.Any(t => t.TicketId == id))
-                return Context.Tickets.SingleOrDefault(t => t.TicketId == id);
+                return Context.Tickets.Include(t=>t.status)
+                .Include(t=>t.severity)
+                .Include(t=>t.category)
+                .SingleOrDefault(t => t.TicketId == id);
 
             throw new NullReferenceException();
+        }
+
+        public bool CheckExistance(int id)
+        {
+            return Context.Tickets.Any(s=>s.TicketId==id);
         }
 
         public void Insert(Ticket ticket)

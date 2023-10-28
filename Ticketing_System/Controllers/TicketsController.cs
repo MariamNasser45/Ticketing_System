@@ -38,16 +38,18 @@ namespace Ticketing_System.Controllers
             {
                 return View(Ticket.GetAllForUser(User.FindFirst(ClaimTypes.NameIdentifier).Value));
             }
-            else if (User.IsInRole("Technician"))
+            if (User.IsInRole("Technician"))
             {
-                return View(Ticket.GetByStatus(2));
+                //return View(Ticket.GetByStatus(2)); // bad security so 
+
+                //in order to secure using Enumerator instead of Magic Number 
+                return View(Ticket.GetByStatus((int)Status.status.Assigned));
+
 
             }
-            else if (User.IsInRole("Manager"))
+            if (User.IsInRole("Manager"))
             {
-                return View(Ticket.GetByStatus(1));
-                //return View();
-
+                return View(Ticket.GetByStatus((int)Status.status.New));
             }
             else
                 return View("/Home"); 
@@ -57,13 +59,17 @@ namespace Ticketing_System.Controllers
         // GET: Tickets/Details/5
         public ActionResult Details(int id)
         {
-            return View(Ticket.GetById(id));
+            if(Ticket.CheckExistance(id))
+                return View(Ticket.GetById(id));
+
+            return NotFound();
         }
 
         // GET: Tickets/Create
         [Authorize(Roles = "Reporter")]
         public ActionResult Create()
         {
+            
             ViewBag.category = new SelectList(category.GetAll(),"CategoryId","CategoryName");
             ViewBag.status = new SelectList(status.GetAll(), "StatusId", "StatusName");
             ViewBag.severity = new SelectList(severity.GetAll(), "SeverityId", "SeverityName");
@@ -85,6 +91,7 @@ namespace Ticketing_System.Controllers
             }
             catch
             {
+                //make silent Exception then return view with empty drop down list
                 return View();
             }
         }

@@ -10,12 +10,12 @@ namespace Ticketing_System.Interfaces
         public List<Ticket> GetByStatus(int id);
 
         public Ticket GetById(int id);
+        public bool CheckExistance(int id);
 
         public void Insert(Ticket ticket);
 
         public void Update(Ticket ticket);
 
         public void Delete(int id);
-
     }
 }

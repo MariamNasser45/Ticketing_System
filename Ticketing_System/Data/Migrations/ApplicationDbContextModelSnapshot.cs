@@ -235,7 +235,7 @@ namespace Ticketing_System.Data.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -270,7 +270,7 @@ namespace Ticketing_System.Data.Migrations
 
                     b.HasKey("SeverityId");
 
-                    b.ToTable("Severities");
+                    b.ToTable("Severities", (string)null);
 
                     b.HasData(
                         new
@@ -305,7 +305,7 @@ namespace Ticketing_System.Data.Migrations
 
                     b.HasKey("StatusId");
 
-                    b.ToTable("Statuses");
+                    b.ToTable("Statuses", (string)null);
 
                     b.HasData(
                         new
@@ -386,7 +386,7 @@ namespace Ticketing_System.Data.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.ToTable("Tickets");
+                    b.ToTable("Tickets", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
