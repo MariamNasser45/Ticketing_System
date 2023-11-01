@@ -10,7 +10,7 @@ using Ticketing_System.Data;
 using Ticketing_System.Interfaces;
 using Ticketing_System.Models;
 
-namespace Ticketing_System.Controllers
+namespace Ticketing_System.Interfaces.Controllers
 {
     public class TicketsController : Controller
     {
@@ -21,10 +21,10 @@ namespace Ticketing_System.Controllers
         private readonly IStatus status;
         private readonly UserManager<IdentityUser> userManager;
 
-        public TicketsController(ApplicationDbContext context, ITicket ticket , ICategory category , ISeverity severity,IStatus status,UserManager<IdentityUser> userManager)
+        public TicketsController(ApplicationDbContext context, ITicket ticket, ICategory category, ISeverity severity, IStatus status, UserManager<IdentityUser> userManager)
         {
             Context = context;
-            this.Ticket = ticket;
+            Ticket = ticket;
             this.category = category;
             this.severity = severity;
             this.status = status;
@@ -34,7 +34,7 @@ namespace Ticketing_System.Controllers
         // GET: Tickets
         public IActionResult Index()
         {
-            if(User.IsInRole("Reporter"))
+            if (User.IsInRole("Reporter"))
             {
                 return View(Ticket.GetAllForUser(User.FindFirst(ClaimTypes.NameIdentifier).Value));
             }
@@ -52,14 +52,14 @@ namespace Ticketing_System.Controllers
                 return View(Ticket.GetByStatus((int)Status.status.New));
             }
             else
-                return View("/Home"); 
+                return View("/Home");
         }
 
 
         // GET: Tickets/Details/5
         public ActionResult Details(int id)
         {
-            if(Ticket.CheckExistance(id))
+            if (Ticket.CheckExistance(id))
                 return View(Ticket.GetById(id));
 
             return NotFound();
@@ -69,8 +69,8 @@ namespace Ticketing_System.Controllers
         [Authorize(Roles = "Reporter")]
         public ActionResult Create()
         {
-            
-            ViewBag.category = new SelectList(category.GetAll(),"CategoryId","CategoryName");
+
+            ViewBag.category = new SelectList(category.GetAll(), "CategoryId", "CategoryName");
             ViewBag.status = new SelectList(status.GetAll(), "StatusId", "StatusName");
             ViewBag.severity = new SelectList(severity.GetAll(), "SeverityId", "SeverityName");
 
@@ -104,7 +104,7 @@ namespace Ticketing_System.Controllers
             ViewBag.status = new SelectList(status.GetAll(), "StatusId", "StatusName");
             ViewBag.Mstatus = new SelectList(status.GetAllForMan(), "StatusId", "StatusName");
             ViewBag.severity = new SelectList(severity.GetAll(), "SeverityId", "SeverityName");
-            
+
             return View(Ticket.GetById(id));
         }
 
@@ -125,7 +125,7 @@ namespace Ticketing_System.Controllers
             }
         }
 
-        [Authorize(Roles ="Reporter")]
+        [Authorize(Roles = "Reporter")]
         // GET: Tickets/Delete/5
         [HttpGet]
         public ActionResult Delete(int id)
@@ -136,7 +136,7 @@ namespace Ticketing_System.Controllers
         // POST: Tickets/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Ticket ticket )
+        public ActionResult Delete(int id, Ticket ticket)
         {
             try
             {

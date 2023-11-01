@@ -3,7 +3,7 @@ using System.Diagnostics;
 using Ticketing_System.Data;
 using Ticketing_System.Models;
 
-namespace Ticketing_System.Controllers
+namespace Ticketing_System.Interfaces.Controllers
 {
     public class HomeController : Controller
     {
@@ -18,7 +18,7 @@ namespace Ticketing_System.Controllers
 
         public IActionResult Index()
         {
-           
+
             return View();
         }
 
